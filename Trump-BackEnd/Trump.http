@@ -1,6 +1,0 @@
-@Trump_HostAddress = http://localhost:5115
-
-GET {{Trump_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
