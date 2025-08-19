@@ -30,24 +30,14 @@ const UploadImage = () => {
     return (
         <section>
             <div className='sm:grid sm:grid-cols-12'>
-            <div className='sm:col-start-4 sm:col-span-6 sm:grid sm:grid-cols-12 glass-container p-6 rounded-xl'>
-                <p className='col-span-12 p-2'>Choose an image to upload</p>
-                {feedbackImage}
-                <input className='w-full sm:col-span-6' onChange={setImageHandler} type='file' />
-                <div className='sm:col-span-6 gap-4 flex justify-end min-w-max'>
-                    <button className='primary-btn' onClick={uploadImage} type='button'>Upload</button>
+                <div className='sm:col-start-4 sm:col-span-6 sm:grid sm:grid-cols-12 glass-container p-6 rounded-xl'>
+                    <p className='col-span-12 p-2'>Choose an image to upload</p>
+                    {feedbackImage}
+                    <input className='w-full sm:col-span-6' onChange={setImageHandler} type='file' />
+                    <div className='sm:col-span-6 gap-4 flex justify-end min-w-max'>
+                        <button className='primary-btn' onClick={uploadImage} type='button'>Upload</button>
+                    </div>
                 </div>
-            </div>
-
-            {/*Styling purposes only*/}
-            <div className='style'></div>
-            <div className='style'></div>
-            <div className='style'></div>
-            <div className='style'></div>
-            <div className='style'></div>
-            <div className='style'></div>
-            <div className='style'></div>
-            <div className='style'></div>
             </div>
 
         </section>

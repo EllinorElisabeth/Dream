@@ -1,55 +1,48 @@
-import axios from 'axios';
-import IThought from '../interfaces/IThought';
+import axios, { AxiosResponse } from "axios";
+import IThought from "../interfaces/IThought";
+import INewThought from "../interfaces/INewThought";
 
-const BASE_URL = 'http://localhost:5115/Thought'
+const BASE_URL = "http://localhost:5115/Thought";
 
-const Service = (
-    () => {
+const Service = (() => {
+  // Get all thoughts
+  const getAllThoughts = async (): Promise<AxiosResponse<IThought[]>> => {
+    return await axios.get<IThought[]>(`${BASE_URL}`);
+  };
 
-        // Get
-        const getAllThoughts = async () => {
-            const response = await axios.get(`${BASE_URL}`);
-            return response;
-        }
+  // Get thought by id
+  const getThoughtById = async (id: number): Promise<AxiosResponse<IThought>> => {
+    return await axios.get<IThought>(`${BASE_URL}/${id}`);
+  };
 
-        const getThoughtById = async (id: number) => {
-            const response = await axios.get(`${BASE_URL}/${id}`);
-            return response;
-        }
+  // Get thought by text
+  const getThoughtByText = async (thought: string): Promise<AxiosResponse<IThought[]>> => {
+    return await axios.get<IThought[]>(`${BASE_URL}/GetByThought/${thought}`);
+  };
 
-        const getThoughtByText = async (thought: string) => {
-            const response = await axios.get(`${BASE_URL}/GetByThought/${thought}`);
-            return response;
-        }
+  // Add new thought
+  const addThought = async (newThought: INewThought): Promise<AxiosResponse<IThought>> => {
+    return await axios.post<IThought>(`${BASE_URL}`, newThought);
+  };
 
-        // Post
-        const addThought = async (newThought: IThought) => {
-            const response = await axios.post(`${BASE_URL}`, newThought);
-            console.log(response);
-        }
+  // Update thought
+  const updateThought = async (updateThought: IThought): Promise<AxiosResponse<IThought>> => {
+    return await axios.put<IThought>(`${BASE_URL}`, updateThought);
+  };
 
-        // Update
-        const updateThought = async (updateThought: IThought) => {
-            const response = await axios.put(`${BASE_URL}`, updateThought);
-            console.log(response);
-        }
+  // Delete thought
+  const deleteThought = async (id: number): Promise<AxiosResponse<void>> => {
+    return await axios.delete<void>(`${BASE_URL}/${id}`);
+  };
 
-        // Delete
-        const deleteThought = async (id: number) => {
-            const response = await axios.delete(`${BASE_URL}/${id}`);
-            console.log(response);
-        }
-
-        return {
-            getAllThoughts,
-            getThoughtById,
-            getThoughtByText,
-            addThought,
-            updateThought,
-            deleteThought
-        }
-
-    }
-)();
+  return {
+    getAllThoughts,
+    getThoughtById,
+    getThoughtByText,
+    addThought,
+    updateThought,
+    deleteThought,
+  };
+})();
 
 export default Service;

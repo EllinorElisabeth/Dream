@@ -27,17 +27,18 @@ export const Provider: FC<Props> = ({ children }) => {
         fetchAllThoughts();
     }, []);
 
-    const addThought = async (newThought: IThought) => {
+    const addThought = async (newThought: IThought): Promise<void> => {
         try {
-            await addThoughtService(newThought);
-            const result = await getAllThoughts();
-            setThoughts(result.data);
+            const result = await addThoughtService(newThought);
+            console.log("Added:", result.data); 
+            const all = await getAllThoughts();
+            setThoughts(all.data);
         } catch (error) {
             console.error("Error: add new thought", error);
         }
     };
 
-    const updateThought = async (updateThought: IThought) => {
+    const updateThought = async (updateThought: IThought): Promise<void> => {
         try {
             await updateThoughtService(updateThought);
             const result = await getAllThoughts();
@@ -47,7 +48,7 @@ export const Provider: FC<Props> = ({ children }) => {
         }
     };
 
-    const deleteThought = async (id: number) => {
+    const deleteThought = async (id: number): Promise<void> => {
         try {
             await deleteThoughtService(id);
             const result = await getAllThoughts();

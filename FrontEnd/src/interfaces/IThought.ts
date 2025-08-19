@@ -1,6 +1,6 @@
 interface IThought {
 
-    id?: number,
+    id: number,
     thoughtText: string,
     
 };

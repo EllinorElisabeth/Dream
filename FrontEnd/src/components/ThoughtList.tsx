@@ -24,36 +24,63 @@ function ThoughtList() {
     };
 
     const ShowAllThoughts = () => {
-        return thoughts.map((thoughtObject, i) => (
-            <li className='sm:col-start-4 sm:col-span-6 sm:grid sm:grid-cols-4 glass-container p-6 rounded-xl' key={i}>
-                <div className='sm:col-span-2 place-content-center text-wrap'>
-                    {thoughtObjectIdEditMode === thoughtObject.id ? (<textarea className='w-full h-full bg-white p-2 rounded-lg' ref={updateThoughtValue} defaultValue={thoughtObject.thoughtText} />) : (thoughtObject.thoughtText)}
+        return thoughts.map((thoughtObject) => (
+            <li
+                key={thoughtObject.id} 
+                className="sm:col-start-4 sm:col-span-6 sm:grid sm:grid-cols-4 glass-container p-6 rounded-xl"
+            >
+                {/* Left side: ID + textarea */}
+                <div className="sm:col-span-2 flex items-start gap-6">
+                    {/* ID */}
+                    <span className="inline-flex items-center justify-center px-2 h-8 border-b-2 border-b-blue-200 text-xs">
+                        ID {thoughtObject.id}
+                    </span>
+
+                    {/* Edit mode */}
+                    <div className="flex-1">
+                        {thoughtObjectIdEditMode === thoughtObject.id ? (
+                            <textarea
+                                className="w-full min-h-20 bg-white p-2 rounded-lg"
+                                ref={updateThoughtValue}
+                                defaultValue={thoughtObject.thoughtText}
+                            />
+                        ) : (
+                            thoughtObject.thoughtText
+                        )}
+                    </div>
                 </div>
+
+                {/* Right side: btns */}
                 <div className="sm:col-span-2 flex gap-4 justify-end">
                     {thoughtObjectIdEditMode === thoughtObject.id ? (
-                        <div className='flex gap-4 place-items-center'>
-                            <button className='secondary-btn' onClick={() => setThoughtObjectIdEditMode(undefined)}>Cancel</button>
-                            <button className='primary-btn' onClick={() => { if (thoughtObject.id) { saveNewThought(thoughtObject.id); } } }>Save</button>
+                        <div className="flex gap-4 items-center">
+                            <button className="secondary-btn" onClick={() => setThoughtObjectIdEditMode(undefined)}>
+                                Cancel
+                            </button>
+                            <button className="primary-btn" onClick={() => saveNewThought(thoughtObject.id!)}>
+                                Save
+                            </button>
                         </div>
                     ) : (
-                        <>
-                            <div className='flex gap-4 place-items-center'>
-                                <button className='secondary-btn' onClick={() => setThoughtObjectIdEditMode(thoughtObject.id)}>Edit</button>
-                                <button className='primary-btn' onClick={() => { if (thoughtObject.id) { deleteThought(thoughtObject.id); } } }>Delete</button>
-                            </div>
-                        </>
+                        <div className="flex gap-4 items-center">
+                            <button className="secondary-btn" onClick={() => setThoughtObjectIdEditMode(thoughtObject.id)}>
+                                Edit
+                            </button>
+                            <button className="primary-btn" onClick={() => deleteThought(thoughtObject.id!)}>
+                                Delete
+                            </button>
+                        </div>
                     )}
                 </div>
             </li>
         ));
-
     };
+
 
     return (
         <section className='grid grid-cols-1 place-items-center m-4'>
 
-            {/*Styling purposes only*/}
-            <div className='circle-wrapper'>
+            <div className='circle-wrapper' aria-hidden="true">
                 <div className='style'></div>
                 <div className='style'></div>
                 <div className='style'></div>
